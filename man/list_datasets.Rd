@@ -4,12 +4,33 @@
 \alias{list_datasets}
 \title{List available Glottography datasets}
 \usage{
-list_datasets()
+list_datasets(online = TRUE)
+}
+\arguments{
+\item{online}{Logical. Should the function attempt to sync the registry with
+the online version? Defaults to \code{TRUE}.}
 }
 \value{
-A data.frame containing dataset metadata.
+A \code{data.frame} containing metadata and status information for all
+Glottography datasets with the following columns:
+\itemize{
+\item \code{name}: The dataset name. Serves as an identifier.
+\item \code{installed}: Logical; whether the dataset is installed locally.
+\item \code{created}: The creation date of the dataset on Zenodo.
+\item \code{version}: The latest available version online.
+\item \code{version_local}: The version currently installed locally.
+\item \code{modified}: Timestamp of the most recent online update.
+\item \code{modified_local}: Timestamp of the local version.
+}
 }
 \description{
-Reads the local registry of available Glottography datasets and
-returns a data.frame with metadata such as title, version, and DOI.
+Lists all available Glottography datasets.
+The function reads the package’s registry file, which contains metadata for all
+datasets along information on local installation status.
+}
+\details{
+If \code{online = TRUE} and an internet connection is available, the function
+attempts to sync the registry with the Glottography community on Zenodo by
+updating the local registry. Otherwise, it runs in offline mode and uses
+the local, unsynced registry.
 }

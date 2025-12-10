@@ -7,6 +7,6 @@
 #' @keywords internal
 #' @noRd
 .dataset_exists <- function(dataset, registry) {
-  dataset %in% registry$names
+  dataset %in% registry$name
 }
 
