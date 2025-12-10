@@ -6,7 +6,7 @@
 #' @param file_path character. Path to the GeoJSON file to read.
 #' @param segment character. Name of the segment (or NA if single segment).
 #' @param dataset character. Name of the dataset.
-#' @param drop_cols character vector of column names to drop from the object.
+#' @param keep_cols character vector of column names to retain from the object.
 #' @param rename_cols named character vector specifying columns to rename.
 #'   Names are the original column names, values are the new names.
 #' @param metadata data frame, optional. Metadata to merge into the spatial object.
@@ -23,17 +23,19 @@
 #' @keywords internal
 #' @noRd
 #'
-.read_sf_level <- function(file_path, segment, dataset, drop_cols = NULL,
+.read_sf_level <- function(file_path, segment, dataset, keep_cols = NULL,
                            rename_cols = NULL, metadata = NULL, metadata_level = NULL) {
   obj <- sf::read_sf(file_path, quiet = TRUE)
+  obj <- sf::st_zm(obj, drop = TRUE, what = "ZM")
 
   # Add basic columns
   obj$segment <- segment
   obj$dataset <- dataset
 
   # Drop unused columns
-  if (!is.null(drop_cols)) {
-    obj <- obj[, setdiff(names(obj), drop_cols)]
+  if (!is.null(keep_cols)) {
+
+    obj <- obj[, intersect(keep_cols, names(obj))]
   }
 
   # Rename columns

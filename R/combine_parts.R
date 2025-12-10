@@ -20,7 +20,9 @@
 #'
 .combine_parts <- function(parts, level, tag_source = FALSE) {
   if ("features" %in% level) {
-    features <- do.call(rbind, lapply(parts, function(x) x$features))
+    # Some features have extra columns (number_legend)
+    aligned_features <- .align_columns(lapply(parts, function(x) x$features))
+    features <- do.call(rbind, aligned_features)
   } else {
     features <- NULL
   }

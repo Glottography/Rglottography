@@ -14,5 +14,7 @@ Imports:
     bibtex,
     cli,
     httr,
+    httr2,
     jsonlite,
-    sf
+    sf,
+    tibble

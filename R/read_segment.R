@@ -34,7 +34,8 @@
     .read_sf_level(
       file.path(path, "features.geojson"),
       segment, dataset,
-      drop_cols = c("glottocode", "maps", "number_legend"),
+      keep_cols = c("name", "year", "map_name_full", "id",
+                    "number_legend", "cldf:languageReference"),
       rename_cols = c("cldf:languageReference" = "glottocode")
     )
   } else NULL
@@ -44,7 +45,7 @@
     .read_sf_level(
       file.path(path, "languages.geojson"),
       segment, dataset,
-      drop_cols = c("fill", "fill-opacity"),
+      keep_cols = c("familiy", "feature_ids", "cldf:languageReference", "title"),
       rename_cols = c("cldf:languageReference" = "glottocode",
                       "title" = "name"),
       metadata = metadata,
@@ -57,7 +58,7 @@
     .read_sf_level(
       file.path(path, "families.geojson"),
       segment, dataset,
-      drop_cols = c("fill", "fill-opacity", "family"),
+      keep_cols = c("feature_ids", "cldf:languageReference", "title"),
       rename_cols = c("cldf:languageReference" = "glottocode",
                       "title" = "name"),
       metadata = metadata,

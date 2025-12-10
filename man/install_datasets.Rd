@@ -4,7 +4,7 @@
 \alias{install_datasets}
 \title{Install Glottography datasets}
 \usage{
-install_datasets(datasets, update = c("outdated", "missing", "always"))
+install_datasets(datasets, update = c("missing", "outdated", "always"))
 }
 \arguments{
 \item{datasets}{Character vector specifying the datasets to install, or one
@@ -17,7 +17,7 @@ available (new version or updated timestamp).
 }}
 
 \item{update}{Character string indicating when selected datasets should be
-installed One of:
+installed. One of:
 \itemize{
 \item \code{"outdated"}: install only if an update is available on Zenodo.
 \item \code{"missing"}: install only if the dataset is not present locally.

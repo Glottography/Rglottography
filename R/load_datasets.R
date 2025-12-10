@@ -12,35 +12,43 @@
 #'   - `"languages"`:  return speaker areas aggregated at the Glottolog language level
 #'   - `"families"`: return speaker areas aggregated at the Glottolog family level
 #'   - `"all"`: return all levels
-#' @param install Logical. If `TRUE`, allows automatic downloading and installation of missing
+#' @param install_missing Logical. If `TRUE`, allows automatic downloading and installation of missing
 #'   datasets when needed.
-#' @param sync_registry Logical. If `TRUE`, refreshes the local registry before
+#' @param sync_registry Logical. If `TRUE`, synchronises the locale registry with Zenodo before
 #'   loading datasets.
 #'
 #' @return A list of `sf` objects.
 #' @keywords internal
 #' @noRd
 #'
-load_glottography <- function(datasets = "installed",
-                              level = c("all", "features",
-                                        "languages", "families"),
-                              install = FALSE,
-                              sync_registry = FALSE) {
+load_datasets <- function(datasets = "installed",
+                          level = c("all", "features",
+                                    "languages", "families"),
+                          install_missing = FALSE,
+                          sync_registry = FALSE) {
 
   level <- .check_level()
   registry <- .get_registry(sync = sync_registry)
 
   datasets_to_read <- .identify_datasets_to_read(datasets, registry)
-  ## CHECK IF THIS WORKS!
-  datasets_to_install <- .identify_datasets_to_install(datasets, registry)
+  datasets_to_install <- .identify_datasets_to_install(datasets_to_read,
+                                                       registry)
+  if (length(datasets_to_install) > 0) {
+    if (install_missing) {
 
-  # STOPP: CHECK FOR character_0
-  if (install & datasets_to_install){
-    install_datasets(datasets_to_install, "missing")
-  } else (
-    # Print warning
-    datasets_to_install
-  )
+      .install_information(datasets_to_install)
+      .download_datasets(datasets_to_install, registry)
+
+      return(load_datasets(datasets = datasets,
+                           level = level,
+                           install_missing = FALSE,
+                           sync_registry = sync_registry))
+
+    } else {
+      .skip_not_installed_warning(datasets_to_install)
+      datasets_to_read <- setdiff(datasets_to_read, datasets_to_install)
+    }
+  }
 
   datasets <- lapply(datasets_to_read, .read_dataset,
                      registry = registry,

@@ -37,19 +37,6 @@
   invisible(NULL)
 }
 
-#' Convert a vector of names in a named vector for use in cli::cli_bullets()
-#'
-#' @param names character. Vector of names
-#' @return named vector for use in cli::cli_bullets()
-#' @keywords internal
-#' @noRd
-.names_to_bullet_list <- function(names){
-  bullet_list <- stats::setNames(
-    names,
-    rep("*", length(names))
-  )
-  bullet_list
-}
 
 #' CLI message when no or unknown dataset name is provided
 #'

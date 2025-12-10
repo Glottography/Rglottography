@@ -14,7 +14,7 @@
 #'   }
 #'
 #' @param update Character string indicating when selected datasets should be
-#'   installed One of:
+#'   installed. One of:
 #'   \itemize{
 #'     \item \code{"outdated"}: install only if an update is available on Zenodo.
 #'     \item \code{"missing"}: install only if the dataset is not present locally.
