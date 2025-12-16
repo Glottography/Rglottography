@@ -11,6 +11,8 @@
 #'   - `"languages"`: areas aggregated at the Glottolog language level
 #'   - `"families"`: areas aggregated at the Glottolog family level
 #'
+#'   If `NULL`, only source information is returned.
+#'
 #' @return A list containing:
 #'   - `features`: an `sf` object or `NULL`
 #'   - `languages`: an `sf` object or `NULL`
@@ -34,7 +36,7 @@
     .read_sf_level(
       file.path(path, "features.geojson"),
       segment, dataset,
-      keep_cols = c("name", "year", "map_name_full", "id",
+      keep_cols = c("name", "dataset", "segment", "year", "map_name_full", "id",
                     "number_legend", "cldf:languageReference"),
       rename_cols = c("cldf:languageReference" = "glottocode")
     )
@@ -45,7 +47,8 @@
     .read_sf_level(
       file.path(path, "languages.geojson"),
       segment, dataset,
-      keep_cols = c("familiy", "feature_ids", "cldf:languageReference", "title"),
+      keep_cols = c("family", "dataset", "segment", "feature_ids",
+                    "cldf:languageReference", "title"),
       rename_cols = c("cldf:languageReference" = "glottocode",
                       "title" = "name"),
       metadata = metadata,
@@ -58,7 +61,8 @@
     .read_sf_level(
       file.path(path, "families.geojson"),
       segment, dataset,
-      keep_cols = c("feature_ids", "cldf:languageReference", "title"),
+      keep_cols = c("feature_ids", "dataset", "segment",
+                    "cldf:languageReference", "title"),
       rename_cols = c("cldf:languageReference" = "glottocode",
                       "title" = "name"),
       metadata = metadata,
@@ -68,7 +72,7 @@
 
   # Sources
   path_sources <- file.path(path, "sources.bib")
-  sources <- bibtex::read.bib(path_sources)
+  sources <- .read_sources(path_sources)
 
   # Return list without metadata
   list(

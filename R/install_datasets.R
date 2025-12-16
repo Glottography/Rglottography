@@ -24,28 +24,29 @@
 #'   This argument is ignored when \code{datasets} is \code{"all"}, \code{"outdated"},
 #'   or \code{"missing"}.
 #'
-#' @return Invisibly returns \code{NULL}.
+#' @return Invisibly returns the installed datasets,
+#'   or \code{NULL} if none were installed.
 #' @export
 install_datasets <- function(datasets,
-                             update = c("missing", "outdated", "always")){
+                             update = c("missing", "outdated", "always")) {
+
+  if (!httr2::is_online()) {
+    cli::cli_abort("No internet connection detected. Cannot install datasets.")
+    }
 
   update <- match.arg(update)
   registry <- .get_registry()
 
-  # Check the user input and return installation instructions
-  instructions <- .get_installation_instructions(datasets, registry, update)
-  .generate_installation_messages(instructions)
+  datasets_to_install <- .get_installation_instructions(datasets, registry,
+                                                        update)
 
-  datasets_to_install <- instructions$name[instructions$to_install]
-
-  if (length(datasets_to_install) == 0) {
+  if (!length(datasets_to_install)) {
     cli::cli_alert_warning("No new datasets will be installed")
     return(invisible(NULL))
   }
-  else {
-    .download_datasets(datasets_to_install, registry)
-    return(invisible(NULL))
-  }
+
+  .download_datasets(datasets_to_install, registry)
+  invisible(datasets_to_install)
 }
 
 

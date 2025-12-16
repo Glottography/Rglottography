@@ -33,32 +33,29 @@
     instructions$modified_local, instructions$modified
   )
 
-  # Initialize result columns
   instructions$to_install <- FALSE
   instructions$comment <- ""
 
-  # Handle user-specified dataset groups
-  if (identical(datasets[1], "all")) {
-    cli::cli_alert_warning("Installing all datasets. The `update` parameter is ignored.")
+  # Handle user-specified datasets
+  if (is.null(datasets) || !length(datasets)) {
+    .provide_valid_dataset_abort()
+  }
+  if (length(datasets) == 1 && identical(datasets, "all")) {
     instructions$to_install <- TRUE
     instructions$comment <- "always"
 
   } else if (identical(datasets[1], "missing")) {
-    cli::cli_alert_warning("Installing missing datasets. The `update` parameter is ignored.")
     instructions$to_install[!instructions$installed] <- TRUE
     instructions$comment[!instructions$installed] <- "missing"
 
   } else if (identical(datasets[1], "outdated")) {
-    cli::cli_alert_warning("Installing outdated datasets. The `update` parameter is ignored.")
     outdated <- !(instructions$is_latest_version & instructions$includes_latest_changes)
     instructions$to_install[outdated] <- TRUE
     instructions$comment[outdated] <- "outdated"
 
   } else {
     # Validate user-specified datasets
-    valid_datasets <- .validate_user_datasets(datasets,
-                                              registry,
-                                              TRUE)
+    valid_datasets <- .validate_datasets(datasets, registry, TRUE)
     is_valid <- instructions$name %in% valid_datasets
     outdated <- !(instructions$is_latest_version &
                     instructions$includes_latest_changes)
@@ -81,8 +78,12 @@
     }
   }
 
-  return(instructions[, c("name", "to_install", "comment")])
+  .summarise_installation_message(instructions)
+
+  datasets_to_install <- instructions$name[instructions$to_install]
+  datasets_to_install
 }
+
 
 
 

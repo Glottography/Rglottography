@@ -11,6 +11,8 @@
 #'   - `"languages"`: areas aggregated at the Glottolog language level
 #'   - `"families"`: areas aggregated at the Glottolog family level
 #'
+#'   If `NULL`, only source information is returned.
+#'
 #' @return A list containing combined data for the dataset, with the following components:
 #'   - `features`: combined `sf` object of feature-level data, or `NULL`
 #'   - `languages`: combined `sf` object of language-level data, or `NULL`

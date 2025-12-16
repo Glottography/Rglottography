@@ -45,6 +45,6 @@
     to   = copy_plan$target)
 
   unlink(main, recursive = TRUE)
-  unique(setNames(copy_plan[, c("segment", "target_dir")],
-                  c("segment", "path")))
+  unique(stats::setNames(copy_plan[, c("segment", "target_dir")],
+                         c("segment", "path")))
 }

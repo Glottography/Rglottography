@@ -12,18 +12,14 @@
 #'   if `datasets` is `NULL`.
 #' @keywords internal
 #' @noRd
-.validate_user_datasets <- function(datasets, registry, install) {
-
-  if (is.null(datasets)) {
-    .specify_valid_dataset_message(install = installe)
-    return(NULL)
-  }
+.validate_datasets <- function(datasets, registry, install) {
 
   valid_datasets <- Filter(function(d) .dataset_exists(d, registry), datasets)
-  invalid_datasets <- setdiff(datasets, valid_datasets)
 
-  for (d in invalid_datasets) {
-    .specify_valid_dataset_message(install = install, ds=d)
-  }
+  .provide_valid_dataset_message(setdiff(datasets, valid_datasets))
+
+  if (length(valid_datasets) == 0){
+    .provide_valid_dataset_abort()}
+
   return(valid_datasets)
 }

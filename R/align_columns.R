@@ -12,7 +12,6 @@
 #' @noRd
 .align_columns <- function(dfs) {
 
-
   # Compute union of all column names in stable order
   all_cols <- unique(unlist(lapply(dfs, names), use.names = FALSE))
 

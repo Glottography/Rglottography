@@ -30,7 +30,7 @@
   records <- .fetch_zenodo_community_records(cols_zenodo)
 
 
-  records <- setNames(records[cols_zenodo], cols_registry)
+  records <- stats::setNames(records[cols_zenodo], cols_registry)
 
   records$name <- sub("https://github.com/Glottography/", "",
                       records$github_repository)

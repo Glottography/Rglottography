@@ -28,7 +28,8 @@ This argument is ignored when \code{datasets} is \code{"all"}, \code{"outdated"}
 or \code{"missing"}.}
 }
 \value{
-Invisibly returns \code{NULL}.
+Invisibly returns the installed datasets,
+or \code{NULL} if none were installed.
 }
 \description{
 Installs Glottography datasets by checking their status in the registry and

@@ -18,7 +18,8 @@
 
     local_registry <- rbind(local_registry,
                             subset(zenodo_registry,
-                                   concept_id %in% missing_datasets))
+                                   zenodo_registry$concept_id %in%
+                                     missing_datasets))
   }
 
   # When syncing omit columns on the local status and the concept id

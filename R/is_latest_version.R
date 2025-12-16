@@ -8,7 +8,7 @@
 .is_latest_version <- function(v_local, v) {
   mapply(function(x, y) {
     if (is.na(x) | is.na(y)) return(FALSE)
-    compareVersion(x, y) >= 0
+    utils::compareVersion(x, y) >= 0
   }, v_local, v)
 }
 

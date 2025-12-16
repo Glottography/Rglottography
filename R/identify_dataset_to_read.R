@@ -20,7 +20,7 @@
     datasets_to_read <- registry$name
 
   } else {
-    datasets_to_read <- .validate_user_datasets(datasets, registry, FALSE)
+    datasets_to_read <- .validate_datasets(datasets, registry, FALSE)
   }
 
   if (length(datasets_to_read) == 0) {

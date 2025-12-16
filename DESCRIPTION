@@ -11,9 +11,7 @@ RoxygenNote: 7.3.3
 URL: https://github.com/Glottography/Rglottography
 BugReports: https://github.com/Glottography/Rglottography/issues
 Imports: 
-    bibtex,
     cli,
-    httr,
     httr2,
     jsonlite,
     sf,
