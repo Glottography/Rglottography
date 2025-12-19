@@ -28,5 +28,8 @@
   registry$modified <- as.POSIXct(registry$modified, tz = "UTC")
   registry$modified_local <- as.POSIXct(registry$modified_local, tz = "UTC")
 
+  # Ensure version_local is character type (not logical)
+  registry$version_local <- as.character(registry$version_local)
+
   registry
 }
