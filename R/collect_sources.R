@@ -37,5 +37,6 @@ collect_sources <- function(glottography) {
     unlist(recursive = TRUE, use.names = FALSE) |>
     unique()
 
+  if (is.null(unique_sources)) unique_sources <- character(0)
   unique_sources
 }

@@ -1,8 +1,14 @@
-#' Retrieves the (synced) local registry file
+#' Retrieve the (synced) local registry
 #'
-#' @return (synced) local registry as data.frame
-#' @param sync (logical) ensures that local registry is synced with Zenodo
-#' @export
+#' Reads the local registry file containing metadata about all available Glottography datasets.
+#' If sync = TRUE, the registry is updated by syncing with the online Zenodo repository.
+#'
+#' @param sync Logical; if TRUE, ensures that the local registry is synced with Zenodo.
+#'   Defaults to FALSE.
+#' @return A data.frame containing the local registry with dataset metadata.
+#' @keywords internal
+#' @noRd
+#'
 .get_registry <- function(sync = TRUE) {
 
   # Get registry file path

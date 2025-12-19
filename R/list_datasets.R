@@ -15,13 +15,13 @@
 #' @return A \code{data.frame} containing metadata and status information for all
 #'   Glottography datasets with the following columns:
 #'   \itemize{
-#'     \item \code{name}: The dataset name. Serves as an identifier.
+#'     \item \code{name}: Dataset name. Serves as a unique identifier.
 #'     \item \code{installed}: Logical; whether the dataset is installed locally.
-#'     \item \code{created}: The creation date of the dataset on Zenodo.
-#'     \item \code{version}: The latest available version online.
-#'     \item \code{version_local}: The version currently installed locally.
+#'     \item \code{created}: Creation date of the dataset on Zenodo.
+#'     \item \code{version}: Latest available version online.
+#'     \item \code{version_local}: Version currently installed locally, or \code{NA} if none.
 #'     \item \code{modified}: Timestamp of the most recent online update.
-#'     \item \code{modified_local}: Timestamp of the local version.
+#'     \item \code{modified_local}: Timestamp of the local version, or \code{NA} if none.
 #'   }
 #' @export
 list_datasets <- function(online = TRUE) {
@@ -32,5 +32,6 @@ list_datasets <- function(online = TRUE) {
   registry <- .get_registry(sync = online)
   cols <- c("name", "installed", "created",
             "version", "version_local", "modified", "modified_local")
-  registry[, cols]
+  rows <- order(registry$name)
+  registry[rows , cols]
 }

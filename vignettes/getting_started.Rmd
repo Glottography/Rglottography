@@ -1,0 +1,93 @@
+---
+title: "Rglottography - Getting started"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Rglottography: Getting started}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+This vignette introduces the basic functionality of the `Rglottography` package.
+An advanced vignette on creating language maps with `Rglottography` and third-party packages is provided in `mapping_languages.Rmd`.
+
+```{r setup, include=FALSE}
+if (!requireNamespace("Rglottography", quietly = TRUE)) {
+  stop("Rglottography must be installed to build this vignette.")
+}
+library(Rglottography)
+```
+
+## Introduction
+
+Glottography is a collection of datasets that describe the spatial extent of speaker areas, that is, the geographic regions in which particular languages are spoken. The `Rglottography` package provides functions for working with these data, including downloading geospatial datasets from Zenodo and converting them to `sf` format. 
+
+Each Glottography dataset includes a `sources` object containing complete bibliographic references in BibTeX format, as well as three geospatial representations of the speaker areas:
+
+- `features`: speaker areas as depicted in the original source publication.
+
+- `languages`: speaker areas aggregated at the Glottolog language level.
+
+- `families`: speaker areas aggregated at the Glottolog family level.
+
+## Listing Datasets
+
+Users can list all available Glottography datasets and view their version, creation date, and installation status on the local machine. Setting `online = TRUE` checks the Glottography community on Zenodo for updates before listing available datasets.
+
+```{r list-install, eval = interactive()}
+available_datasets <- list_datasets(online = FALSE)
+```
+<div style="font-size:x-small">
+```{r show table, echo=FALSE}
+
+if (exists("available_datasets") && nrow(available_datasets) > 0) {
+  knitr::kable(head(available_datasets))
+}
+
+```
+</div>
+
+## Installing datasets
+
+Users can install individual Glottography datasets (e.g. `matsumae2021exploring`), all available datasets (`"all"`), or only those datasets that are missing from their local machine (`"missing"`). Installation examples are shown for illustration only and are not run during package checks.
+
+```{r install-datasets, eval=FALSE}
+install_datasets(datasets = "asher2007world")
+```
+
+## Load Glottography data
+
+Users can load installed Glottography datasets into the current R session as a single collection. The `datasets` argument accepts either a character vector specifying the names of datasets to load or one of the special values   `"installed"`, which loads all datasets already installed locally, or `"all"`, which loads all available datasets and installs any missing datasets if necessary. By default, the returned Glottography collection includes all available levels (`features`, `languages`, and `families`), but users can restrict which levels are loaded.
+
+```{r load-datasets, eval=FALSE}
+collection <- load_datasets(datasets = "installed", level = "all")
+
+features <- collection$features
+languages <- collection$languages
+families <- collection$families
+sources <- collection$sources
+```
+
+## Collecting Sources
+
+`Rglottography` makes it straightforward to extract the scientific references for all language polygons used, for example, in a map. For any Glottography object — a complete collection, `features`, `languages`, `families`, or any subset thereof — users can collect the bibliographic references in BibTeX format, print them, or write them to a file.
+
+```{r collect-sources, eval=FALSE}
+sources <- collect_sources(languages)
+writeLines(sources)
+```
+
+
+## References and Further Reading
+
+For further guidance and examples:
+
+- An advanced vignette on creating language maps with `Rglottography` using optional third-party packages is provided in `mapping_languages.Rmd`. 
+
+- Consult the package documentation for each function for detailed usage information.

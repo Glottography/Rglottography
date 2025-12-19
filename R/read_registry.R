@@ -22,6 +22,11 @@
   registry <- jsonlite::fromJSON(registry_path, simplifyVector = TRUE,
                                  simplifyDataFrame = TRUE,
                                  simplifyMatrix = TRUE)
+
+  # Convert timestamp columns from character to POSIXct
+  registry$created <- as.POSIXct(registry$created, tz = "UTC")
+  registry$modified <- as.POSIXct(registry$modified, tz = "UTC")
   registry$modified_local <- as.POSIXct(registry$modified_local, tz = "UTC")
-  return(registry)
+
+  registry
 }

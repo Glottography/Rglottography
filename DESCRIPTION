@@ -1,9 +1,9 @@
 Package: Rglottography
-Title: What the Package Does (One Line, Title Case)
-Version: 0.0.0.9000
+Title: Programmatic Access to Glottography Language Polygons
+Version: 0.1.0
 Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"))
-Description: What the package does (one paragraph).
+    person("Peter", "Ranacher", email = "peter.ranacher@gmail.com", role = c("aut", "cre"))
+Description: Rglottography provides programmatic access to Glottography, an online repository of geospatial speaker-area polygons for the world’s languages. The package allows users to list available datasets, download them from Zenodo, and load speaker-area polygons as standard spatial sf objects in R.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
@@ -16,3 +16,14 @@ Imports:
     jsonlite,
     sf,
     tibble
+Suggests: 
+    testthat,
+    mockery,
+    knitr,
+    rmarkdown,
+    ggplot2,
+    dplyr,
+    rnaturalearth
+Config/testthat/edition: 3
+VignetteBuilder: knitr
+
