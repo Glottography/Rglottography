@@ -3,7 +3,7 @@ Title: Programmatic Access to Glottography Language Polygons
 Version: 0.1.0
 Authors@R: 
     person("Peter", "Ranacher", email = "peter.ranacher@gmail.com", role = c("aut", "cre"))
-Description: Rglottography provides programmatic access to Glottography, an online repository of geospatial speaker-area polygons for the world’s languages. The package allows users to list available datasets, download them from Zenodo, and load speaker-area polygons as standard spatial sf objects in R.
+Description: Provides programmatic access to Glottography, an online repository of geospatial speaker-area polygons for the world’s languages. The package allows users to list available datasets, download them from Zenodo, and load speaker-area polygons as standard spatial sf objects in R.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
