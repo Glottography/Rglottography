@@ -42,7 +42,7 @@ jobs:
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          dependencies: true
+          dependencies: TRUE
           extra-packages: any::rcmdcheck
           needs: check
 
