@@ -31,6 +31,10 @@ jobs:
           r-version: ${{ matrix.config.r }}
           use-public-rspm: true
       
+      - name: Install system dependencies
+        if: runner.os == 'macOS'
+        run: brew install gdal proj geos
+      
       - name: Install dependencies
         run: |
           install.packages(c("remotes", "rcmdcheck"))
