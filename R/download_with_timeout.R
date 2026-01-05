@@ -6,14 +6,14 @@
 #' @param url Character string specifying the URL of the file to download.
 #' @param zip_path Character string specifying the local file path where the
 #'   downloaded file should be saved.
-#' @param timeout Numeric. The download timeout in seconds (default is 600).
+#' @param timeout Numeric. The download timeout in seconds (default is 1200).
 #'
 #' @return `NULL`. The function is called for downloading
 #'   the file.
 #' @keywords internal
 #' @noRd
 #'
-.download_with_timeout <- function(url, zip_path, timeout = 600) {
+.download_with_timeout <- function(url, zip_path, timeout = 1200) {
 
   old_timeout <- getOption("timeout")
   on.exit(options(timeout = old_timeout))

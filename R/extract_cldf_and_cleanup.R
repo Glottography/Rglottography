@@ -1,14 +1,19 @@
 #' Extract and organize CLDF data files
 #'
-#' Copies the main CLDF data files (`features`, `languages`, `families`) and
-#' `sources.bib` from their segment sub-folders into the specified dataset directory,
-#' preserving the segment structure. After copying, the original extracted folders
-#' are deleted to clean up temporary files.
+#' Copies selected CLDF data files (`features`, `languages`, `families`,
+#' `languages.csv`, and `sources.bib`) from a dataset's `cldf/` directory into
+#' the specified dataset directory. If the `cldf/` directory contains segment
+#' subfolders (identified by the presence of a `languages.csv` file), each
+#' subfolder is treated as a separate segment and its structure is preserved.
+#' Otherwise, the `cldf/` directory itself is treated as a single segment.
+#'
+#' After copying, the original extracted dataset directory is deleted to clean
+#' up temporary files.
 #'
 #' @param dataset_dir Character. Path to the dataset directory where CLDF files
 #'   should be organized.
-#' @return A data frame listing the original segment names and the corresponding
-#'   local folder paths where files were copied.
+#' @return A data frame with columns `segment` and `path`, listing segment names
+#'   (or `NA` for unsegmented datasets) and the corresponding local folder paths.
 #' @keywords internal
 #' @noRd
 .extract_cldf_and_cleanup <- function(dataset_dir) {
@@ -16,15 +21,24 @@
   main <- list.files(dataset_dir, full.names = TRUE)[1]
   cldf <- file.path(main, "cldf")
   sub_cldf <- list.dirs(cldf, recursive = FALSE, full.names = TRUE)
-  segments <- if (length(sub_cldf) == 0) cldf else sub_cldf
+
+  has_segments <- length(sub_cldf) > 0 &&
+    any(file.exists(file.path(sub_cldf, "languages.csv")))
+
+  segments_path <- if (has_segments) {
+    # keep only valid segment folders
+    sub_cldf[file.exists(file.path(sub_cldf, "languages.csv"))]
+  } else {
+    cldf
+  }
 
   copy_plan <- expand.grid(
-    source_dir = segments,
+    source_dir = segments_path,
     filename   = c("features.geojson", "languages.geojson",
                    "families.geojson", "languages.csv", "sources.bib"),
     stringsAsFactors = FALSE)
 
-  if (length(segments) == 1) {
+  if (length(segments_path) == 1) {
     # single segment: no segment subfolder and segment column NA
     copy_plan$segment <- NA_character_
     copy_plan$target_dir <- dataset_dir
