@@ -4,7 +4,7 @@
 [![R-CMD-check](https://github.com/Glottography/Rglottography/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/Glottography/Rglottography/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
-Rglottography provides programmatic access to Glottography, an online repository of geospatial speaker-area polygons for the world’s languages. The package allows users to list available datasets, download them from Zenodo, and load them as standard spatial (`sf`) objects in R.
+Rglottography provides programmatic access to Glottography, an online repository of geospatial speaker-area polygons for the world’s languages. The package allows users to list available datasets, download them, and load them as standard spatial (`sf`) objects in R.
 
 ## Installation
 
