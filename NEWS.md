@@ -1,3 +1,9 @@
+# Rglottography 1.1.1
+
+## Bug fixes
+
+* Minor bug fixes.
+
 # Rglottography 1.1.0
 
 ## Improvements
