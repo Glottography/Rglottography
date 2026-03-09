@@ -14,19 +14,9 @@
 #'
 #' @return A data frame containing the requested metadata columns for all public
 #'   datasets in the specified community. Missing columns are filled with `NA`.
-#'
-#' @details
-#' - Only public datasets are returned. Private or embargoed datasets require
-#'   authentication.
-#' - This function uses unauthenticated requests; page size is limited to 25 and
-#'   rate limits may apply.
-#' - Pagination is handled automatically until all records are retrieved.
-#' - Column names are taken exactly from `cols_zenodo`; if some are missing in
-#'   the API response, they are added as `NA`.
-#'
 #' @keywords internal
 #' @noRd
-.fetch_zenodo_community_records <- function(cols_zenodo,
+.fetch_community_records_zenodo <- function(cols_zenodo,
                                             community = "glottography",
                                             page_size = 25){
   records <- list()

@@ -28,7 +28,7 @@
     zenodo_registry <- .build_registry()
 
     # Sync local data with Zenodo data
-    synced_registry <- .sync_registry(local_registry, zenodo_registry)
+    synced_registry <- .sync_registry_zenodo(local_registry, zenodo_registry)
 
     # Write synced registry to file and return
     .write_registry(synced_registry)

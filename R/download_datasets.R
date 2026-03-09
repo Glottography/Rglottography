@@ -1,6 +1,6 @@
 #' Download datasets and update the registry
 #'
-#' The function downloads specified Glottography datasets from Zenodo,
+#' The function downloads specified Glottography datasets from GitHub or Zenodo,
 #' updates the registry and writes the updated registry to disk.
 #'
 #' @param datasets Character. Names of the datasets to download.
@@ -11,10 +11,13 @@
 .download_datasets <- function(datasets, registry) {
 
   idx <- match(datasets, registry$name)
+
   concept_dois <- registry$concept_doi[idx]
+  github_repositories <- registry$github_repository[idx]
 
   # Download datasets
   local_paths <- mapply(.fetch_dataset, datasets,
+                        github_repositories,
                         concept_dois, SIMPLIFY = FALSE)
 
   # Update registry

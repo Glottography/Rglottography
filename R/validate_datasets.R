@@ -1,6 +1,6 @@
 #' Validate user-provided dataset names and filter out invalid ones
 #'
-#' This internal helper verifies that the provided dataset names are valid and that
+#' Verifies that the provided dataset names are valid and that
 #' each dataset exists. Invalid dataset names trigger a warning message via
 #' `.specify_valid_dataset_message()`, and are removed from the returned list.
 #'

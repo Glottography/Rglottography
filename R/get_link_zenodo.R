@@ -11,7 +11,7 @@
 #' @keywords internal
 #' @noRd
 #'
-.get_zenodo_link <- function(concept_doi) {
+.get_link_zenodo <- function(concept_doi) {
   base_url <- "https://zenodo.org/api/records/"
   query_url <- paste0(base_url, "?q=conceptdoi:", concept_doi,
                       "&sort=mostrecent&size=1")

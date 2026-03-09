@@ -8,7 +8,7 @@
 #' @keywords internal
 #' @noRd
 
-.sync_registry <- function(local_registry, zenodo_registry){
+.sync_registry_zenodo <- function(local_registry, zenodo_registry){
 
   missing_datasets <- setdiff(zenodo_registry$concept_id,
                               local_registry$concept_id)

@@ -7,8 +7,7 @@
 #'
 #' @param path Character scalar; path to the BibTeX file.
 #' @return A character vector of length 1 containing the full contents
-#'   of the BibTeX file. Can be written to a `.bib` file using
-#'   \code{writeLines()}
+#'   of the BibTeX file.
 #' @keywords internal
 #' @noRd
 .read_sources <- function(path) {

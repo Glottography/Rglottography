@@ -1,9 +1,8 @@
-#' Download a (Glottography dataset) with a custom timeout
+#' Download a Glottography dataset from Zenodo
 #'
-#' Downloads a file from a URL to a local path, temporarily increasing
-#' the R download timeout to accommodate large Glottography datasets
-#'
-#' @param url Character string specifying the URL of the file to download.
+#' Download a ZIP archive from a Zenodo URL to a local file path
+#' #'
+#' @param url Character string specifying the Zenodo URL of the file to download.
 #' @param zip_path Character string specifying the local file path where the
 #'   downloaded file should be saved.
 #' @param timeout Numeric. The download timeout in seconds (default is 1200).
@@ -13,7 +12,7 @@
 #' @keywords internal
 #' @noRd
 #'
-.download_with_timeout <- function(url, zip_path, timeout = 1200) {
+.download_zenodo <- function(url, zip_path, timeout = 1200) {
 
   old_timeout <- getOption("timeout")
   on.exit(options(timeout = old_timeout))

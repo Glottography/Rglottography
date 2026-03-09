@@ -3,7 +3,7 @@
 #' This internal helper evaluates the dataset registry and user-specified input
 #' to determine which datasets need to be installed or updated. It considers the dataset's
 #' current version, local modification date, and the `update` policy (`"always"`,
-#' `"missing"`, or `"outdated"`). It returns a data frame with installation instructions
+#' `"missing"`, or `"outdated"`). It returns a data.frame with installation instructions
 #' including flags and comments for each dataset.
 #'
 #' @param datasets character. A vector of dataset names provided by the user, or
@@ -29,7 +29,7 @@
     instructions$version_local, instructions$version
   )
 
-  instructions$includes_latest_changes <- .includes_latest_changes(
+  instructions$includes_latest_changes <- .includes_latest_changes_zenodo(
     instructions$modified_local, instructions$modified
   )
 

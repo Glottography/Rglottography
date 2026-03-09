@@ -1,10 +1,12 @@
-#' Validate and expand level selection
+#' Validate and expand Glottography level selection
 #'
-#' Decide which dataset levels should be used based on the user input.
+#' Validates the requested dataset level(s) and expands the special value
+#' `"all"` to include all available levels.
 #'
-#' @param level Character scalar specifying the level(s) to use. Must be
-#'   one of `"all"`, `"features"`, `"languages"`, or `"families"` or a combination of these.
-#'   The value `"all"` is expanded to include all available levels.
+#' @param level Character vector specifying the level(s) to use. Must contain
+#'   one or more of `"features"`, `"languages"`, or `"families"`, or the
+#'   special value `"all"`. If `"all"` is supplied, it is expanded to all
+#'   available levels.
 #' @return A character vector of valid levels. If `"all"` is supplied,
 #'   returns `c("features", "languages", "families")`.
 #' @keywords internal

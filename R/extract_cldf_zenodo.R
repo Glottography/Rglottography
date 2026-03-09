@@ -1,22 +1,24 @@
-#' Extract and organize CLDF data files
+#' Extract and organise CLDF data files
 #'
 #' Copies selected CLDF data files (`features`, `languages`, `families`,
-#' `languages.csv`, and `sources.bib`) from a dataset's `cldf/` directory into
-#' the specified dataset directory. If the `cldf/` directory contains segment
-#' subfolders (identified by the presence of a `languages.csv` file), each
-#' subfolder is treated as a separate segment and its structure is preserved.
-#' Otherwise, the `cldf/` directory itself is treated as a single segment.
+#' `languages.csv`, and `sources.bib`) from the `cldf/` directory of a dataset
+#' downloaded from Zenodo into the specified dataset directory.
 #'
-#' After copying, the original extracted dataset directory is deleted to clean
+#' If the `cldf/` directory contains segment subfolders (identified by the presence
+#' of a `languages.csv` file), each subfolder is treated as a separate segment
+#' and its folder structure is preserved. Otherwise, the `cldf/` directory itself
+#' is treated as a single segment.
+#'
+#' After copying, the original extracted dataset directory is deleted to tidy
 #' up temporary files.
 #'
 #' @param dataset_dir Character. Path to the dataset directory where CLDF files
-#'   should be organized.
+#'   should be organised.
 #' @return A data frame with columns `segment` and `path`, listing segment names
 #'   (or `NA` for unsegmented datasets) and the corresponding local folder paths.
 #' @keywords internal
 #' @noRd
-.extract_cldf_and_cleanup <- function(dataset_dir) {
+.extract_cldf_zenodo <- function(dataset_dir) {
 
   main <- list.files(dataset_dir, full.names = TRUE)[1]
   cldf <- file.path(main, "cldf")

@@ -1,9 +1,7 @@
 #' Extract dataset names from a Glottography object
 #'
-#' Recursively extracts the names of datasets from a Glottography object, which
-#' can be a single polygon, a collection, or a data.frame. If the object is a
-#' list, the function traverses all elements and returns a character vector of
-#' dataset names.
+#' Recursively extracts the names of datasets from a Glottography object,
+#' a data.frame or a list.
 #'
 #' @param glottography A Glottography object (e.g., `glottography_collection`,
 #'   `glottography_polygons`, or a data.frame or list) from which to extract dataset names.
@@ -28,7 +26,7 @@
     return(NULL)
   }
 
-  # List / collection: recursively extract
+  # List: recursively extract
   if (is.list(glottography)) {
     return(unlist(lapply(glottography, .extract_datasets), use.names = FALSE))
   }
