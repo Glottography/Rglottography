@@ -25,8 +25,8 @@ library(Rglottography)
 # List available datasets
 list_datasets()
 
-# Load the dataset matsumae2021exploring, downloading it from Zenodo on first use.
-glottography <- load_datasets("matsumae2021exploring")
+# Load the dataset matsumae2021exploring, downloading it on first use.
+glottography <- load_datasets("matsumae2021exploring", install_missing = TRUE)
 languages <- glottography$languages
 ```
 
