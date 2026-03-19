@@ -46,6 +46,10 @@ containing the following components (if requested):
 Components not requested are omitted.
 }
 \description{
-Loads speaker area data and associated metadata from the Glottography collection,
-optionally installing missing datasets and synchronising the local registry.
+Loads Glottography speaker area data and associated metadata from the Glottography collection
+into the current R session, optionally installing missing datasets.
+}
+\details{
+If \code{install_missing = TRUE}, the function automatically installs
+any missing datasets before loading.
 }

@@ -1,0 +1,34 @@
+bibentry(
+  bibtype = "Article",
+  title = "Glottography: an open-source geolinguistic data platform for mapping the world's languages",
+  author = c(
+    person("Peter", "Ranacher"),
+    person("Robert", "Forkel"),
+    person("Nour", "Efrat-Kowalsky"),
+    person("Matthias", "Urban"),
+    person("Antonia", "Hehli"),
+    person("Micha", "Franz"),
+    person("Gregory", "Biland"),
+    person("Aaron", "Kreienbühl"),
+    person("Alba Hermida", "Rodríguez"),
+    person("Matheus C. B. C.", "Azevedo"),
+    person("James", "Giebler"),
+    person("Takuya", "Takahashi"),
+    person("Nico", "Neureiter"),
+    person("Rik", "van Gijn"),
+    person("Meeli", "Roose"),
+    person("Outi", "Vesakoski"),
+    person("Robert", "Weibel"),
+    person("Gereon", "Kaiping"),
+    person("Sietze", "Norder")
+  ),
+  journal = "Journal of Open Humanities Data",
+  year = "2026",
+  month = "March",
+  doi = "10.5334/johd.459",
+  textVersion = paste0(
+    "Ranacher, P., et al. (2026). ",
+    "Glottography: an open-source geolinguistic data platform for mapping the world's languages. ",
+    "Journal of Open Humanities Data. doi:10.5334/johd.459"
+  )
+)

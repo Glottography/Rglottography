@@ -5,7 +5,7 @@ Authors@R:
     person("Peter", "Ranacher", email = "peter.ranacher@gmail.com", role = c("aut", "cre"))
 Author: Peter Ranacher [aut, cre]
 Maintainer: Peter Ranacher <peter.ranacher@gmail.com>
-Description: Description: Provides programmatic access to Glottography, an online
+Description: Provides programmatic access to Glottography, an online
     repository of geospatial speaker-area polygons for the world's
     languages. The package allows users to list available datasets,
     download and install them, and load speaker-area polygons as
@@ -13,6 +13,7 @@ Description: Description: Provides programmatic access to Glottography, an onlin
     the Glottography organization on GitHub
     <https://github.com/Glottography> or the Glottography community
     on Zenodo <https://zenodo.org/communities/glottography>.
+    Based on Ranacher et al. (2026) <doi:10.5334/johd.459>.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Language: en-GB

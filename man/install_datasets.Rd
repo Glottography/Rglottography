@@ -33,6 +33,10 @@ or \code{NULL} if none were installed.
 }
 \description{
 Installs Glottography datasets by checking their status in the registry and
-downloading them from the Zenodo Glottography community according to
-user-specified rules.
+downloading them from the Zenodo Glottography community.
+}
+\details{
+By default, datasets are cached in the directory returned
+by \code{tools::R_user_dir("Rglottography", "data")}.
+You can change the cache location using \code{set_cache_dir(path)}.
 }

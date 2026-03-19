@@ -229,3 +229,11 @@ To acknowledge the primary sources used to construct the map, we can collect the
 ```{r collect-sources, eval = FALSE}
 sources <- collect_sources(even_kory_chuk)
 ```
+
+## References and Further Reading
+
+- **Primary Citation**: Ranacher et al. (2026). Glottography: an open-source geolinguistic data platform for mapping the world’s languages. *Journal of Open Humanities Data*. <doi:10.5334/johd.459>
+
+- **Advanced Mapping**: An advanced vignette on creating language maps with `Rglottography` using optional third-party packages is provided in `vignette("mapping_languages", package = "Rglottography")`.
+
+- **Documentation**: Consult the package documentation for each function for detailed usage information (e.g., `?load_datasets` or `?Rglottography`).

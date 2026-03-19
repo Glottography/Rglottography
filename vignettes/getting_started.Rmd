@@ -82,8 +82,10 @@ writeLines(sources)
 
 ## References and Further Reading
 
-For further guidance and examples:
+- **Primary Citation**: Ranacher et al. (2026). Glottography: an open-source geolinguistic data platform for mapping the world’s languages. *Journal of Open Humanities Data*. <doi:10.5334/johd.459>
 
-- An advanced vignette on creating language maps with `Rglottography` using optional third-party packages is provided in `mapping_languages.Rmd`. 
+- **Getting started**: An introduction to the package's basic functionality is available in `vignette("getting_started", package = "Rglottography")`.
 
-- Consult the package documentation for each function for detailed usage information.
+- **Documentation**: Consult the package documentation for each function for detailed usage information (e.g., `?load_datasets` or `?Rglottography`).
+
+

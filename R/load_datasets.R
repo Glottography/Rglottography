@@ -1,7 +1,7 @@
 #' Load Glottography datasets
 #'
-#' Loads speaker area data and associated metadata from the Glottography collection,
-#' optionally installing missing datasets.
+#' Loads Glottography speaker area data and associated metadata from the Glottography collection
+#' into the current R session, optionally installing missing datasets.
 #'
 #' @param datasets Character vector specifying the names of datasets to load, or
 #'   one of the following special values:
