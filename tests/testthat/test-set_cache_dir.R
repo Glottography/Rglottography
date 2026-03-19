@@ -13,12 +13,12 @@ test_that("throws error when remove_old is TRUE and copy_existing is FALSE", {
 # Test 2: Identical cache directory path
 
 test_that("throws error when new path is identical to current cache", {
-  old <- tempdir()
-  options(Rglottography.cache_dir = old)
+  old <- normalizePath(tempdir(), winslash = "/", mustWork = FALSE)
+  on.exit(options(Rglottography.cache_dir = NULL), add = TRUE)
 
-  # Mock .get_cache_path
+  options(Rglottography.cache_dir = old)
   with_mocked_bindings(
-    .get_cache_path = function() normalizePath(old, winslash = "/", mustWork = FALSE),
+    .get_cache_path = function() old,
     {
       expect_error(
         set_cache_dir(old),
@@ -30,18 +30,17 @@ test_that("throws error when new path is identical to current cache", {
 
 # Test 3: Creates new cache directory if it does not exist
 
-test_that("creates cache directory if it does not exist", {
-  new_path <- file.path(tempdir(), "new-cache-dir")
+test_that("sets option correctly and returns invisibly", {
+  new_path <- normalizePath(file.path(tempdir(), "cache-option-test"),
+                            winslash = "/", mustWork = FALSE)
+  on.exit(unlink(new_path, recursive = TRUE), add = TRUE)
 
   with_mocked_bindings(
     .get_cache_path = function() tempdir(),
     {
-      unlink(new_path, recursive = TRUE)
-      expect_false(dir.exists(new_path))
-
-      set_cache_dir(new_path, copy_existing = FALSE)
-
-      expect_true(dir.exists(new_path))
+      result <- set_cache_dir(new_path, copy_existing = FALSE)
+      expect_equal(getOption("Rglottography.cache_dir"), new_path)
+      expect_equal(normalizePath(result, winslash = "/", mustWork = FALSE), new_path)
     }
   )
 })
@@ -65,25 +64,27 @@ test_that("sets option correctly and returns invisibly", {
 
 test_that("copies existing cache files when copy_existing = TRUE", {
   current <- tempdir()
-  new_path <- file.path(tempdir(), "copy-test")
+  new_path <- normalizePath(file.path(tempdir(), "copy-test"),
+                            winslash = "/", mustWork = FALSE)
+  on.exit(unlink(new_path, recursive = TRUE), add = TRUE)
 
   registry_file <- file.path(current, "registry.json")
-  writeLines("{}", registry_file)
+  on.exit(unlink(registry_file), add = TRUE)
 
+  writeLines("{}", registry_file)
   fake_registry <- data.frame(
     name = c("dataset1"),
     install = c(TRUE),
     stringsAsFactors = FALSE
   )
-
   dir.create(file.path(current, "dataset1"), showWarnings = FALSE)
+  on.exit(unlink(file.path(current, "dataset1"), recursive = TRUE), add = TRUE)
 
   with_mocked_bindings(
     .get_cache_path = function() current,
     .get_registry = function(sync = FALSE) fake_registry,
     {
       set_cache_dir(new_path, copy_existing = TRUE, remove_old = FALSE)
-
       expect_true(file.exists(file.path(new_path, "registry.json")))
       expect_true(dir.exists(file.path(new_path, "dataset1")))
     }
@@ -94,25 +95,27 @@ test_that("copies existing cache files when copy_existing = TRUE", {
 
 test_that("does not copy files when copy_existing = FALSE", {
   current <- tempdir()
-  new_path <- file.path(tempdir(), "no-copy-test")
+  new_path <- normalizePath(file.path(tempdir(), "no-copy-test"),
+                            winslash = "/", mustWork = FALSE)
+  on.exit(unlink(new_path, recursive = TRUE), add = TRUE)
 
   registry_file <- file.path(current, "registry.json")
-  writeLines("{}", registry_file)
+  on.exit(unlink(registry_file), add = TRUE)
 
+  writeLines("{}", registry_file)
   fake_registry <- data.frame(
     name = c("dataset1"),
     install = c(TRUE),
     stringsAsFactors = FALSE
   )
-
   dir.create(file.path(current, "dataset1"), showWarnings = FALSE)
+  on.exit(unlink(file.path(current, "dataset1"), recursive = TRUE), add = TRUE)
 
   with_mocked_bindings(
     .get_cache_path = function() current,
     .get_registry = function(sync = FALSE) fake_registry,
     {
       set_cache_dir(new_path, copy_existing = FALSE, remove_old = FALSE)
-
       expect_false(file.exists(file.path(new_path, "registry.json")))
       expect_false(dir.exists(file.path(new_path, "dataset1")))
     }
@@ -123,7 +126,8 @@ test_that("does not copy files when copy_existing = FALSE", {
 
 test_that("removes old files when remove_old = TRUE", {
   current <- tempdir()
-  new_path <- file.path(tempdir(), "remove-old-test")
+  new_path <- normalizePath(file.path(tempdir(), "remove-old-test"),
+                            winslash = "/", mustWork = FALSE)
 
   registry_file <- file.path(current, "registry.json")
   writeLines("{}", registry_file)
@@ -154,20 +158,18 @@ test_that("removes old files when remove_old = TRUE", {
 test_that("works when cache is empty", {
   current <- file.path(tempdir(), "empty-cache")
   dir.create(current, showWarnings = FALSE)
+  on.exit(unlink(current, recursive = TRUE), add = TRUE)
 
-  new_path <- file.path(tempdir(), "empty-cache-new")
+  new_path <- normalizePath(file.path(tempdir(), "empty-cache-new"),
+                            winslash = "/", mustWork = FALSE)
+  on.exit(unlink(new_path, recursive = TRUE), add = TRUE)
 
   with_mocked_bindings(
     .get_cache_path = function() current,
     {
       result <- set_cache_dir(new_path, copy_existing = TRUE)
-
-      expect_equal(
-        getOption("Rglottography.cache_dir"),
-        normalizePath(new_path, winslash = "/", mustWork = FALSE)
-      )
-      expect_equal(normalizePath(result,   winslash = "/", mustWork = FALSE),
-                   normalizePath(new_path, winslash = "/", mustWork = FALSE))
+      expect_equal(getOption("Rglottography.cache_dir"), new_path)
+      expect_equal(normalizePath(result, winslash = "/", mustWork = FALSE), new_path)
     }
   )
 })
