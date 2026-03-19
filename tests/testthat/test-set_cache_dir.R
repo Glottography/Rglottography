@@ -57,7 +57,8 @@ test_that("sets option correctly and returns invisibly", {
       result <- set_cache_dir(new_path, copy_existing = FALSE)
 
       expect_equal(getOption("Rglottography.cache_dir"), normalizePath(new_path, winslash = "/", mustWork = FALSE))
-      expect_equal(result, normalizePath(new_path, winslash = "/", mustWork = FALSE))
+      expect_equal(normalizePath(result,   winslash = "/", mustWork = FALSE),
+                   normalizePath(new_path, winslash = "/", mustWork = FALSE))
     }
   )
 })
@@ -167,7 +168,8 @@ test_that("works when cache is empty", {
         getOption("Rglottography.cache_dir"),
         normalizePath(new_path, winslash = "/", mustWork = FALSE)
       )
-      expect_equal(result, normalizePath(new_path, winslash = "/", mustWork = FALSE))
+      expect_equal(normalizePath(result,   winslash = "/", mustWork = FALSE),
+                   normalizePath(new_path, winslash = "/", mustWork = FALSE))
     }
   )
 })
