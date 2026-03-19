@@ -7,34 +7,30 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r, include = FALSE}
+```{r setup, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
+library(Rglottography)
 ```
 
 This vignette introduces the basic functionality of the `Rglottography` package.
 An advanced vignette on creating language maps with `Rglottography` and third-party packages is provided in `mapping_languages.Rmd`.
 
-```{r setup, include=FALSE}
-if (!requireNamespace("Rglottography", quietly = TRUE)) {
-  stop("Rglottography must be installed to build this vignette.")
-}
-library(Rglottography)
-```
-
 ## Introduction
 
-Glottography is a collection of datasets that describe the spatial extent of speaker areas, that is, the geographic regions in which particular languages are spoken. The `Rglottography` package provides functions for working with these data, including downloading geospatial datasets from Zenodo and converting them to `sf` format. 
+Glottography is a collection of datasets that describe the spatial extent of speaker areas, that is, the geographic regions in which particular languages are spoken. The `Rglottography` package provides functions for working with these data, including downloading geospatial datasets and converting them to `sf` format. Data are sourced from either the [Glottography organization on GitHub](https://github.com/Glottography) or the [Glottography community on Zenodo]( https://zenodo.org/communities/glottography). 
 
-Each Glottography dataset includes a `sources` object containing complete bibliographic references in BibTeX format, as well as three geospatial representations of the speaker areas:
+Each Glottography dataset includes three geospatial representations of the speaker areas:
 
 - `features`: speaker areas as depicted in the original source publication.
 
 - `languages`: speaker areas aggregated at the Glottolog language level.
 
 - `families`: speaker areas aggregated at the Glottolog family level.
+
+Additionally, the `sources` object contains complete bibliographic references for all datasets in BibTeX format.
 
 ## Listing Datasets
 

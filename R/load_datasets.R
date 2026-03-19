@@ -1,7 +1,7 @@
 #' Load Glottography datasets
 #'
 #' Loads speaker area data and associated metadata from the Glottography collection,
-#' optionally installing missing datasets and synchronising the local registry.
+#' optionally installing missing datasets.
 #'
 #' @param datasets Character vector specifying the names of datasets to load, or
 #'   one of the following special values:
@@ -24,6 +24,9 @@
 #'
 #' @param sync_registry Logical. If \code{TRUE}, synchronises the local registry with Zenodo
 #'   before loading datasets.
+#'
+#' @details If \code{install_missing = TRUE}, the function automatically installs
+#' any missing datasets before loading.
 #'
 #' @return A validated Glottography collection (S3 class \code{glottography_collection})
 #'   containing the following components (if requested):

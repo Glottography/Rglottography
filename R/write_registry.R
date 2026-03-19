@@ -15,6 +15,8 @@
 
   registry_path <- .get_registry_path()
 
+  dir.create(dirname(registry_path), recursive = TRUE, showWarnings = FALSE)
+
   # Write registry to file
   json_string <- jsonlite::toJSON(registry, na = "null",
                                   pretty = TRUE,

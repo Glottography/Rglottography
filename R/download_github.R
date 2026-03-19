@@ -43,6 +43,12 @@
     file.path(data_dir, download_plan$segment)
   )
 
+  download_plan$rel_target_dir <- ifelse(
+    is.na(download_plan$segment),
+    basename(data_dir),
+    file.path(basename(data_dir), download_plan$segment)
+  )
+
   download_plan$file_url <- mapply(
     .make_github_raw_url,
     MoreArgs = list(github_parts = github_parts),
@@ -57,11 +63,9 @@
          download_plan$file_path,
          SIMPLIFY = FALSE)
 
-  unique(stats::setNames(download_plan[, c("segment", "target_dir")],
+  unique(stats::setNames(download_plan[, c("segment", "rel_target_dir")],
                          c("segment", "path")))
 
 }
-
-# How do I return an error if download_file_github fails?
 
 

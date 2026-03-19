@@ -44,11 +44,14 @@
     # single segment: no segment subfolder and segment column NA
     copy_plan$segment <- NA_character_
     copy_plan$target_dir <- dataset_dir
+    copy_plan$rel_target_dir <- basename(dataset_dir)
 
   } else {
     # multiple segments: use basename of source_dir as segment and include it in target_dir
     copy_plan$segment <- basename(copy_plan$source_dir)
     copy_plan$target_dir <- file.path(dataset_dir, copy_plan$segment)
+    copy_plan$rel_target_dir <- file.path(basename(dataset_dir),
+                                          copy_plan$segment)
   }
 
   copy_plan$source <- file.path(copy_plan$source_dir, copy_plan$filename)
@@ -61,6 +64,6 @@
     to   = copy_plan$target)
 
   unlink(main, recursive = TRUE)
-  unique(stats::setNames(copy_plan[, c("segment", "target_dir")],
+  unique(stats::setNames(copy_plan[, c("segment", "rel_target_dir")],
                          c("segment", "path")))
 }

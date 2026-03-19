@@ -20,6 +20,8 @@
   on.exit(options(timeout = old_timeout))
   options(timeout = timeout)
 
+  if (!dir.exists(dirname(file_path))) dir.create(dirname(file_path))
+
   utils::download.file(file_url, file_path, mode = "wb", quiet = TRUE)
 
   return(invisible(NULL))

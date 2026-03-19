@@ -1,8 +1,8 @@
 #' Install Glottography datasets
 #'
 #' Installs Glottography datasets by checking their status in the registry and
-#' downloading them from the Zenodo Glottography community according to
-#' user-specified rules.
+#' downloading them from the Zenodo Glottography community.
+#'
 #'
 #' @param datasets Character vector specifying the datasets to install, or one
 #'   of the following special values:
@@ -23,6 +23,10 @@
 #'
 #'   This argument is ignored when \code{datasets} is \code{"all"}, \code{"outdated"},
 #'   or \code{"missing"}.
+#'
+#' @details By default, datasets are cached in the directory returned
+#'   by \code{tools::R_user_dir("Rglottography", "data")}.
+#'   You can change the cache location using \code{set_cache_dir(path)}.
 #'
 #' @return Invisibly returns the installed datasets,
 #'   or \code{NULL} if none were installed.

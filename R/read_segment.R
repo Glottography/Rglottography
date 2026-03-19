@@ -4,7 +4,7 @@
 #' returning only the requested levels of aggregation.
 #'
 #' @param segment character. Name of the segment, or NA if there is only a single segment.
-#' @param path character. Path to the directory containing the segment's files.
+#' @param path character. (Relative) path to the directory containing the segment's files.
 #' @param dataset character. Name of the dataset.
 #' @param level character vector specifying which levels of aggregation to load:
 #'   - `"features"`: speaker areas according to the original source classification
@@ -23,18 +23,20 @@
 #' @noRd
 #'
 .read_segment <- function(segment, path, dataset, level) {
+  cache_dir <- .get_cache_path()
+  path_segment <- file.path(cache_dir, path)
 
   # Load metadata only if needed
   metadata <- NULL
   if ("languages" %in% level | "families" %in% level) {
-    path_metadata <- file.path(path, "languages.csv")
+    path_metadata <- file.path(path_segment, "languages.csv")
     metadata <- utils::read.csv(path_metadata, stringsAsFactors = FALSE)
   }
 
   # Features
   features <- if ("features" %in% level) {
     .read_sf_level(
-      file.path(path, "features.geojson"),
+      file.path(path_segment, "features.geojson"),
       segment, dataset,
       keep_cols = c("name", "dataset", "segment", "year", "map_name_full", "id",
                     "number_legend", "cldf:languageReference"),
@@ -45,7 +47,7 @@
   # Languages
   languages <- if ("languages" %in% level) {
     .read_sf_level(
-      file.path(path, "languages.geojson"),
+      file.path(path_segment, "languages.geojson"),
       segment, dataset,
       keep_cols = c("family", "dataset", "segment", "feature_ids",
                     "cldf:languageReference", "title"),
@@ -59,7 +61,7 @@
   # Families
   families <- if ("families" %in% level) {
     .read_sf_level(
-      file.path(path, "families.geojson"),
+      file.path(path_segment, "families.geojson"),
       segment, dataset,
       keep_cols = c("feature_ids", "dataset", "segment",
                     "cldf:languageReference", "title"),
@@ -71,7 +73,7 @@
   } else NULL
 
   # Sources
-  path_sources <- file.path(path, "sources.bib")
+  path_sources <- file.path(path_segment, "sources.bib")
   sources <- .read_sources(path_sources)
 
   # Return list without metadata

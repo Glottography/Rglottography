@@ -19,7 +19,7 @@
 
 .fetch_dataset <- function(dataset, github_repository, concept_doi) {
 
-  cache_dir <- tools::R_user_dir("Rglottography", "data")
+  cache_dir <- .get_cache_path()
   data_dir <- file.path(cache_dir, dataset)
   if (!dir.exists(data_dir)) dir.create(data_dir, recursive = FALSE)
 
