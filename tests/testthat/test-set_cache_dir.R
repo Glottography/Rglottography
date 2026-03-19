@@ -49,16 +49,14 @@ test_that("creates cache directory if it does not exist", {
 # Test 4: Sets Rglottography.cache_dir option and returns path
 
 test_that("sets option correctly and returns invisibly", {
-  new_path <- file.path(tempdir(), "cache-option-test")
-
+  new_path <- normalizePath(file.path(tempdir(), "cache-option-test"),
+                            winslash = "/", mustWork = FALSE)
   with_mocked_bindings(
     .get_cache_path = function() tempdir(),
     {
       result <- set_cache_dir(new_path, copy_existing = FALSE)
-
-      expect_equal(getOption("Rglottography.cache_dir"), normalizePath(new_path, winslash = "/", mustWork = FALSE))
-      expect_equal(normalizePath(result,   winslash = "/", mustWork = FALSE),
-                   normalizePath(new_path, winslash = "/", mustWork = FALSE))
+      expect_equal(getOption("Rglottography.cache_dir"), new_path)
+      expect_equal(normalizePath(result, winslash = "/", mustWork = FALSE), new_path)
     }
   )
 })
