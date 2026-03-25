@@ -4,7 +4,7 @@
 \name{Rglottography}
 \alias{Rglottography-package}
 \alias{Rglottography}
-\title{Rglottography: A Geolinguistic Data Platform for Mapping the World's Languages}
+\title{Rglottography: Programmatic Access to the 'Glottography' Geolinguistic Data Platform}
 \description{
 Provides programmatic access to Glottography, an online repository of
 geospatial speaker-area polygons for the world's languages. This package

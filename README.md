@@ -1,8 +1,6 @@
 # Rglottography
 
-<!-- badges: start -->
 [![R-CMD-check](https://github.com/Glottography/Rglottography/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/Glottography/Rglottography/actions/workflows/R-CMD-check.yaml)
-<!-- badges: end -->
 
 Rglottography provides programmatic access to the Glottography dataset, a collection of language area polygons hosted on Zenodo and GitHub. The package allows users to list available datasets, download them, and load them as standard spatial (`sf`) objects in R.
 
@@ -46,8 +44,7 @@ Linguists, geographers, cultural anthropologists, and others working with areal 
 You can install the development version of Rglottography from GitHub using `remotes`. If not already installed, first install  `remotes`, then use it to install Rglottography from GitHub:
 
 ```r
-# install.packages("remotes")
-remotes::install_github("Glottography/Rglottography")
+install.packages("Rglottography")
 ```
 ---
 
